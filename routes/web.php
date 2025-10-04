@@ -3,6 +3,7 @@
 namespace App\Routes;
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\StudentsController;
 use App\Http\Middleware\ValidRole;
 
 Route::get('/', function () {
@@ -18,3 +19,4 @@ Route::get('/teachers', function () {
 
     return view('teachers', ['teachers' => $teachers]);
 })->middleware(ValidRole::class);
+Route::resource('/students', StudentsController::class);

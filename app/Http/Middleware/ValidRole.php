@@ -21,7 +21,7 @@ class ValidRole
     public function isAdmin() : bool
     {
 
-        if(rand(1, 2) == 1)
+        if(rand(1, 2) == 2)
         {
         return true;
         }
@@ -31,7 +31,7 @@ class ValidRole
     public function handle(Request $request, Closure $next): Response
     {
 
-        if($this->isAdmin())
+        if(!$this->isAdmin())
         {
             return response()->json(['error' => 'Доступ запрещён, доступ только админам'], 403);
         }
