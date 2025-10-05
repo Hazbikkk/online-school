@@ -19,6 +19,7 @@
             </style>
         @endif
     </head>
+    <script src="https://cdn.tailwindcss.com"></script>
     <body class="bg-[#FDFDFC] dark:bg-[#0a0a0a] text-[#1b1b18] flex p-6 lg:p-8 items-center lg:justify-center min-h-screen flex-col">
 
     <h1 class = "text-white">Добро пожаловать на сайт онлайн школы!</h1>
@@ -31,10 +32,10 @@
                             @php
                             }
                             @endphp</h2>
-                            @if($role == 1)
-                                <h2 class = "text-white">Добро пожаловать, ученик!</h2>
-                            @elseif($role == 2)
-                                    <h2 class = "text-white">Добро пожаловать, Админ!</h2>
-                            @endif
+                                <h2 class = "text-white">Добро пожаловать<h2>
+
+                            <a class="mt-4 inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" href="{{ route('auth.admin') }}">войти как админ</a>
+                            <a class="mt-4 inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">войти в аккаунт ученика</a>
+
     </body>
 </html>
