@@ -14,7 +14,14 @@
     @error('name')
                 <span style="color: red;">{{ $message }}</span>
     @enderror
-    Email: <input name="email" type="email">
+    Предмет: 
+    
+<select name="object" id="object">
+  <option value="math">Математика</option>
+  <option value="phisic">Физика</option>
+  <option value="russian">Русский</option>
+  <option value="geographi">География</option>
+</select>
     @error('email')
                 <span style="color: red;">{{ $message }}</span>
     @enderror

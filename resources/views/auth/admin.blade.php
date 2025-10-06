@@ -7,7 +7,7 @@
 </head>
 <script src="https://cdn.tailwindcss.com"></script>
 <body>
-    <form method="POST" action="{{ route('auth.store')}}">
+    <form method="POST" action="{{ route('auth.admin.store')}}">
         @csrf
         @error('login')
             <span style="color: red;">{{ $message }}</span>

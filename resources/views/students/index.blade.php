@@ -6,7 +6,7 @@
     <title>Document</title>
 </head>
 <body>
-    <h2>Студенты</h2>
+    <h2>Админ панель</h2>
 
     @foreach($students as $student)
 
@@ -16,7 +16,7 @@
 
     @endforeach
 
-    <a href = "{{ route('students.create') }}">Создать студента</a>
+    <a href = "{{ route('students.create') }}">Создать учителя</a>
 
 </body>
 </html>

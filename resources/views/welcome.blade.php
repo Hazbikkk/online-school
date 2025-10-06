@@ -35,7 +35,7 @@
                                 <h2 class = "text-white">Добро пожаловать<h2>
 
                             <a class="mt-4 inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" href="{{ route('auth.admin') }}">войти как админ</a>
-                            <a class="mt-4 inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">войти в аккаунт ученика</a>
+                            <a class="mt-4 inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" href = "{{ route('auth.user') }}">войти в аккаунт ученика</a>
 
     </body>
 </html>

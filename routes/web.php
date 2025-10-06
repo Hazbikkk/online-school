@@ -20,5 +20,10 @@ Route::get('/teachers', function () {
     return view('teachers', ['teachers' => $teachers]);
 })->middleware(ValidRole::class);
 Route::resource('/students', StudentsController::class);
-Route::get('/auth/admin', [AuthController::class, 'registration'])->name('auth.admin');
-Route::post('/auth', [AuthController::class, 'store'])->name('auth.store')->middleware(AdminOrUser::class);
+Route::get('/auth/admin', [AuthController::class, 'registrationForAdmin'])->name('auth.admin');
+Route::get('/auth/user', [AuthController::class, 'registrationForUser'])->name('auth.user');
+Route::post('/auth/admin/store', [AuthController::class, 'storeAdmin'])->name('auth.admin.store')->middleware(AdminOrUser::class);
+Route::post('/auth', [AuthController::class, 'storeUser'])->name('auth.user.store');
+Route::get('/auth/user/confirm', [AuthController::class, 'confirm'])->name('auth.user.confirm');
+Route::get('/register/students', [AuthController::class, 'appruvStudents'])->name('registration.students');
+Route::post('/register', [AuthController::class, 'storeRegisterStudents'])->name('register.students.store');

@@ -17,16 +17,6 @@ class AdminOrUser
     public function handle(Request $request, Closure $next)
     {
         // Создаём экземпляр StoreAuthAdminRequest
-        $formRequest = new StoreAuthAdminRequest();
-        $formRequest->merge($request->all());
-        $formRequest->setContainer(app())->setRedirector(app()->make('redirect'));
-
-        // Проверяем валидацию
-        $validator = validator($formRequest->all(), $formRequest->rules());
-        if ($validator->fails()) {
-            return response()->json(['errors' => $validator->errors()], 422);
-        }
-
         $login = 'Hadis';
         $password = "1002910029";
         $request_login = $request->input('login');
