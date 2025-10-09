@@ -22,14 +22,12 @@ class RegisterStoreStudRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required',
-            'code' => 'required'
+            'code' => 'required',
         ];
     }
     public function messages(): array
     {
         return [
-            'name.required' => 'Имя не должно быть пустым!',
             'code.required' => 'Пароль не должно быть пустым!'
         ];
     }

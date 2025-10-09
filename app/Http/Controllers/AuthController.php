@@ -33,12 +33,12 @@ class AuthController extends Controller
     }
     public function storeRegisterStudents(Request $request, RegisterStoreStudRequest $requestStud)
     {
-        
+        $validated = $requestStud->validated();   
         $user = AuthUsers::where('code', $request->input('code'))->first();
+        $user_sess = $request->session()->get('storeUser');
 
-
-        if ($user && $request->input('code') === $user->code && $requestStud->validated()) {
-            return view('welcome.student');
+        if ($user_sess['code'] == $validated['code']) {
+            return view('welcome.student', ['name' => $user->name]);
         }
 
         return response()->json(['error' => 'Неправильное имя или код'], 422);
@@ -48,14 +48,15 @@ class AuthController extends Controller
         $validated = $request->validated();
         AuthAdmin::create($validated);
 
-        return route('students.index');
+        return route('adminPanel.index');
     }
     public function storeUser(StoreAuthUserRequest $request)
     {
         $validated = $request->validated();
-        $code = rand(1000, 9999); // Исправленный диапазон для четырехзначного кода
+        $code = rand(1234, 9999); // Исправленный диапазон для четырехзначного кода
         $validated['code'] = $code;
         $user = AuthUsers::create($validated);
+        $request->session()->put('storeUser', ['name' => $user->name, 'code' => $user->code]);
 
         // Отправляем письмо с именем и кодом
         SenEmailJob::dispatch($user->email, $user->name, $user->code);

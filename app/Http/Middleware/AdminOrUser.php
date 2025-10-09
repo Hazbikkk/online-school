@@ -22,7 +22,8 @@ class AdminOrUser
         $request_login = $request->input('login');
         $request_password = $request->input('password');
         if($login == $request_login && $password == $request_password){
-            return redirect()->route('students.index');
+            $IsAdmin = $request->session()->put('IsAdmin', true);
+            return redirect()->route('adminPanel.index');
         }
             return response()->json(['error' => 'неправильные логин или пароль']);
     }

@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreStudentsRequest extends FormRequest
+class StoreAdminPanelRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,14 +23,14 @@ class StoreStudentsRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'email' => 'required'
+            'object' => 'required'
         ];
     }
     public function messages(): array
     {
         return [
         'name.required' => 'Поле имени пустое!',
-        'email.required' => 'Почта пустая!'
+        'object.required' => 'Выберите предмет!'
             ];
     }
 }

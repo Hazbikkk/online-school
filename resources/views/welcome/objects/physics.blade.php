@@ -6,7 +6,6 @@
     <title>Document</title>
 </head>
 <body>
-    <h2>{{ $student->name }}</h2>
-    <h2>{{ $student->email }}</h2>
+    <h1>Что то связанное с физикой</h1>
 </body>
 </html>
