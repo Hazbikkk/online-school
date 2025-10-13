@@ -4,24 +4,41 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Админ панель</title>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<script src="https://cdn.tailwindcss.com"></script>
-<body>
-    <div class="ml-5">
-    <div class = "flex">
-    <h2 class="mb-2">Админ панель</h2>
-    <a href="#" class="ml-5 bg-yellow-300 hover:bg-yellow-500 p-2 rounded">Управление ролями</a>
-    </div>
+<body class="bg-gradient-to-br from-blue-100 to-gray-100 flex items-center justify-center min-h-screen py-8">
+    <div class="bg-white p-8 rounded-xl shadow-2xl max-w-4xl w-full transform transition-all duration-300 hover:shadow-3xl">
+        <!-- Заголовок и навигация -->
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-8">
+            <h2 class="text-3xl font-extrabold text-gray-900">Админ панель</h2>
+            <div class="flex flex-col sm:flex-row gap-4 mt-4 sm:mt-0">
+                <a href="{{ route('role.index') }}" class="bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-semibold py-2 px-4 rounded-lg transition-colors duration-200">
+                    Управление ролями
+                </a>
+                <a href="{{ route('employee.create') }}" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors duration-200">
+                    Создать сотрудника
+                </a>
+            </div>
+        </div>
 
-    @foreach($teachers as $teacher)
+        <!-- Список учителей -->
+        <div class="grid gap-6">
+            @foreach($teachers as $teacher)
+                <div class="bg-gray-50 p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-200">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Учитель - {{ $teacher->name }}</h3>
+                    <a href="{{ route('adminPanel.show', $teacher->id) }}" class="inline-block bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors duration-200">
+                        Подробнее
+                    </a>
+                </div>
+            @endforeach
+        </div>
 
-    <h2 class="mt-2">Учитель - {{ $teacher->name }}</h2> <br>
-
-    <a class="ml-5 mt-2 mb-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" href = "{{ route('adminPanel.show', $teacher->id) }}">подробнее</a>
-
-    @endforeach<br><br><br>
-
-    <a class="mt-10 ml-4 mt-2 mb-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" href = "{{ route('adminPanel.create') }}">Создать учителя</a>
+        <!-- Кнопка создания учителя -->
+        <div class="mt-8">
+            <a href="{{ route('adminPanel.create') }}" class="inline-block bg-blue-500 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-200">
+                Создать учителя
+            </a>
+        </div>
     </div>
 </body>
 </html>
