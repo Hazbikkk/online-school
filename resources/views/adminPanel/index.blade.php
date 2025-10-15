@@ -16,7 +16,7 @@
                     Управление ролями
                 </a>
                 <a href="{{ route('employee.create') }}" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors duration-200">
-                    Создать сотрудника
+                    Приглосить сотрудника
                 </a>
             </div>
         </div>

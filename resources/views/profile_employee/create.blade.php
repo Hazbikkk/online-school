@@ -12,7 +12,7 @@
         <h1 class="text-3xl font-extrabold text-gray-900 mb-6 text-center">Привет, {{ $role_name }}!</h1>
         <p class="text-gray-600 mb-8 text-center">Заполни форму, чтобы создать свой профиль</p>
         
-        <form method="POST" action="{{ route('employee.store') }}">
+        <form method="POST" action="{{ route('employee_profile.store') }}">
             @csrf
             
             <!-- Поле: Полное ФИО -->
@@ -23,12 +23,21 @@
                     <span class="text-red-500 text-sm mt-2 block">{{ $message }}</span>
                 @enderror
             </div>
+
+            <!-- Поле: Полное ФИО -->
+            <div class="mb-6">
+                <label for="email" class="block text-sm font-medium text-gray-700 mb-2">Почта</label>
+                <input type="email" name="email" id="email" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200" value="{{ old('name') }}" required>
+                @error('email')
+                    <span class="text-red-500 text-sm mt-2 block">{{ $message }}</span>
+                @enderror
+            </div>
             
             <!-- Поле: Лет опыта -->
             <div class="mb-6">
-                <label for="experience_years" class="block text-sm font-medium text-gray-700 mb-2">Лет опыта</label>
-                <input type="number" name="experience_years" id="experience_years" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200" value="{{ old('experience_years') }}" min="0" required>
-                @error('experience_years')
+                <label for="years" class="block text-sm font-medium text-gray-700 mb-2">Лет опыта</label>
+                <input type="number" name="years" id="years" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200" value="{{ old('experience_years') }}" min="0" required>
+                @error('years')
                     <span class="text-red-500 text-sm mt-2 block">{{ $message }}</span>
                 @enderror
             </div>
@@ -51,12 +60,12 @@
 <div id="errorBlock"></div>
             <div class="mb-6">
                 <label for="password" class="block text-sm font-medium text-gray-700 mb-2">Придумайте пароль</label>
-                <input type="password" name="password" id="pass" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200" required>
+                <input type="password" name="pass" id="pass" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200" required>
                 @error('password')
                     <span class="text-red-500 text-sm mt-2 block">{{ $message }}</span>
                 @enderror
                 <label for="password" class="mt-4 block text-sm font-medium text-gray-700 mb-2">Повторите пароль</label>
-                <input type="password" name="password_repeat" id="repPass" class="mt-1 w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200" required>
+                <input type="password" name="repPass" id="repPass" class="mt-1 w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200" required>
 </div>
 
             
@@ -70,7 +79,7 @@
             </div>
             
             <!-- Кнопка отправки -->
-            <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-300">
+            <button type="submite" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-300">
                 Создать профиль
             </button>
         </form>

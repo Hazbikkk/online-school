@@ -11,10 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('admin_panels', function (Blueprint $table) {
+        Schema::create('employee_profiles', function (Blueprint $table) {
             $table->id();
+            $table->string('avatar')->nullable();
             $table->string('name');
-            $table->string('object')->nullable();
+            $table->string('email');
+            $table->integer('years');
+            $table->string('pass');
+            $table->string('repPass');
+            $table->string('about');
             $table->timestamps();
         });
     }
@@ -24,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('admin_panels');
+        Schema::dropIfExists('employee_profiles');
     }
 };
