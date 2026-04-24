@@ -13,9 +13,6 @@
 
         <!-- Список ролей -->
         <h2 class="text-xl font-semibold text-gray-700 mb-4">Все роли:</h2>
-        @if($roles->isEmpty())
-            <p class="text-gray-500 italic">Ролей пока нет.</p>
-        @else
             <div class="space-y-4">
                 @foreach($roles as $role)
                     <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg shadow-sm hover:bg-gray-100 transition">
@@ -30,7 +27,6 @@
                     </div>
                 @endforeach
             </div>
-        @endif
 
         <!-- Ссылка для создания роли -->
         <div class="mt-6 text-center">

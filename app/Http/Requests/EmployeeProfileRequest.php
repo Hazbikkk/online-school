@@ -22,22 +22,7 @@ class EmployeeProfileRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required',
-            'email' => 'required',
-            'years' => 'required',
-            'pass' => 'required',
-            'repPass' => 'required',
-            'about' => 'required'
-        ];
-    }
-    public function messages(): array
-    {
-        return [
-            'name.required',
-            'years.required',
-            'pass.required',
-            'repPass.required',
-            'about.required'
+            //
         ];
     }
 }

@@ -32,6 +32,8 @@ class AdminPanelController extends Controller
     public function store(StoreAdminPanelRequest $request)
     {
         $validated = $request->validated();
+        // TODO: пиши вот так $adminPanel = AdminPanel::query()->create($validated);
+        // query() обязательно
         AdminPanel::create($validated);
         return redirect()->route('adminPanel.index')->with('success', 'Учитель добавлен!');
     }
@@ -41,6 +43,8 @@ class AdminPanelController extends Controller
      */
     public function show(string $id)
     {
+        // TODO: query() обязательно
+        // выше смотри
         $teacher = AdminPanel::findOrFail($id);
 
         return view('adminPanel.show', ['teacher' => $teacher]);
@@ -51,6 +55,8 @@ class AdminPanelController extends Controller
      */
     public function edit(string $id)
     {
+        // TODO: query() обязательно
+        // выше смотри
         $teacher = adminPanel::findOrFail($id);
 
         return view('adminPanel.edit', compact('teacher'));
@@ -62,6 +68,8 @@ class AdminPanelController extends Controller
     public function update(StoreAdminPanelRequest $request, string $id)
     {
         $validated = $request->validated();
+                // TODO: query() обязательно
+        // выше смотри
         $teacher = AdminPanel::findOrFail($id);
         $teacher->update($validated);
 
@@ -71,8 +79,11 @@ class AdminPanelController extends Controller
     /**
      * Remove the specified resource from storage.
      */
+    // TODO: public function destroy(тут тебе надо получать класс AdminPanel)
     public function destroy(string $id)
     {
+        // TODO: query() обязательно
+        // выше смотри
         $teacher = AdminPanel::findOrFail($id); // Находим запись или выбрасываем 404
         $teacher->delete(); // Удаляем запись
         

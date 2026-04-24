@@ -24,7 +24,16 @@
                 @enderror
             </div>
 
-            <!-- Поле: Полное ФИО -->
+            @if($role_name == "Teacher")
+                Выберите предмет <select type="text" name="object">
+                    <option value="Математика">Математика</option>
+                    <option value="Физика">Физика</option>
+                    <option value="Русский">Русский</option>
+                    <option value="География">География</option>
+                </select><br>
+            @enderror
+
+            <!-- Поле: Полная почта -->
             <div class="mb-6">
                 <label for="email" class="block text-sm font-medium text-gray-700 mb-2">Почта</label>
                 <input type="email" name="email" id="email" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200" value="{{ old('name') }}" required>

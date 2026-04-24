@@ -15,6 +15,7 @@ use App\Jobs\SenEmailJob;
 use Illuminate\Support\Facades\Log;
 use App\Http\Requests\RegisterStoreStudRequest;
 use App\Models\RegisterStud;
+use Illuminate\Support\Facades\DB;
 
 
 class AuthController extends Controller
@@ -33,12 +34,13 @@ class AuthController extends Controller
     }
     public function storeRegisterStudents(Request $request, RegisterStoreStudRequest $requestStud)
     {
-        $validated = $requestStud->validated();   
-        $user = AuthUsers::where('code', $request->input('code'))->first();
+        $validated = $requestStud->validated();
+        $code = $requestStud->query('code');
+        $user = DB::table('register_stud')->where('code', $code)->first();
         $user_sess = $request->session()->get('storeUser');
 
         if ($user_sess['code'] == $validated['code']) {
-            return view('welcome.student', ['name' => $user->name]);
+            return redirect()->route('welcome.index');
         }
 
         return response()->json(['error' => 'Неправильное имя или код'], 422);
@@ -52,20 +54,44 @@ class AuthController extends Controller
     }
     public function storeUser(StoreAuthUserRequest $request)
     {
-        $validated = $request->validated();
-        $code = rand(1234, 9999); // Исправленный диапазон для четырехзначного кода
-        $validated['code'] = $code;
-        $user = AuthUsers::create($validated);
-        $request->session()->put('storeUser', ['name' => $user->name, 'code' => $user->code]);
+            // Валидация данных
+    $validated = $request->validate([
+        'name' => 'required|string|max:255',
+        'email' => 'required|email',
+    ]);
 
-        // Отправляем письмо с именем и кодом
-        SenEmailJob::dispatch($user->email, $user->name, $user->code);
+    // Генерация кода
+    $code = rand(1234, 9999);
+    $validated['code'] = $code;
 
-        return redirect()->route('auth.user.confirm', [
-            'name' => $user->name,
-            'email' => $user->email,
-        ]);
+    // Вставка данных в таблицу
+    // Вместо DB::table
+    $user = AuthUsers::create([
+        'name' => $validated['name'],
+        'email' => $validated['email'],
+        'code' => $code,
+    ]);
+
+    // Проверка, что пользователь создан
+    if (!$user) {
+        return redirect()->back()->with('error', 'Не удалось создать пользователя');
     }
+
+    // Сохранение данных в сессию
+    $request->session()->put('storeUser', [
+        'name' => $user->name,
+        'code' => $user->code,
+    ]);
+
+    // Отправка письма через задачу
+    dispatch(new SenEmailJob($user->code, $user->name, $user->email));
+
+    // Перенаправление
+    return redirect()->route('auth.user.confirm', [
+        'name' => $user->name,
+        'email' => $user->email,
+    ])->with('success', 'Код отправлен на почту');
+        }
 
     public function confirm(Request $request)
     {

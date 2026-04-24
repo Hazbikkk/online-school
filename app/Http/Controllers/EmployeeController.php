@@ -7,6 +7,7 @@ use App\Http\Requests\StoreEmployeeRequest;
 use App\Models\Roles;
 use Illuminate\Support\Facades\Redirect;
 use App\Models\Employee;
+use Illuminate\Support\Facades\URL;
 
 class EmployeeController extends Controller
 {
@@ -45,35 +46,32 @@ class EmployeeController extends Controller
     return Redirect::route('ref', ['role_id' => $validated['role_id']]);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function refssilkaStore(StoreEmployeeRequest $request)
     {
-        //
+
+        // Получаем role_id из query-параметра
+    $role_id = $request->query('role_id');
+    
+    // Сохраняем роль в сессии, только если role_id передан
+    if ($role_id) {
+        $request->session()->put('role_name', $role_id);
+    }
+    
+    // Создаем временную подписанную ссылку
+    $refssilka = URL::temporarySignedRoute('profile_employee', now()->addMinutes(30));
+    
+    return view('ref.index', ['refssilka' => $refssilka]);
+
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    public function StoreEmployeeInDB(StoreEmployeeRequest $request)
     {
-        //
+        $role_name = $request->session()->get('role_name');
+        $roles = Roles::all(); // Или статический список ролей
+        return view('profile_employee.create', [
+        'role_name' => $role_name,
+        'roles' => $roles
+        ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
-    }
 }

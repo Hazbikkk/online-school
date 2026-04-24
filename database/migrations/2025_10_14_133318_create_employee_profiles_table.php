@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('avatar')->nullable();
             $table->string('name');
+            $table->string('object');
             $table->string('email');
             $table->integer('years');
             $table->string('pass');

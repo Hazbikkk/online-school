@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Requests\RoleRequest;
 use App\Models\Roles;
 
@@ -14,7 +15,7 @@ class RoleController extends Controller
     public function index()
     {
         $title = "Роли сотрудников";
-        $roles = Roles::all();
+        $roles = DB::select('select * from roles');
         return view('role.index', ['title' => $title,
                                    'roles' => $roles]);
     }
@@ -33,7 +34,9 @@ class RoleController extends Controller
     public function store(RoleRequest $request)
     {
         $validated = $request->validated();
-        $role = Roles::create($validated);
+        DB::table('roles')->insert(
+            ['name' => $validated['name']]
+        );
 
         return redirect()->route('role.index');
     }
@@ -67,8 +70,9 @@ class RoleController extends Controller
      */
     public function destroy(string $id)
     {
-        $role = Roles::findOrFail($id);
-        $role->delete();
+        DB::table('roles')->where('id', $id)->first();
+        
+        DB::delete('delete from roles');
         return redirect()->route('role.index');
     }
 }

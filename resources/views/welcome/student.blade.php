@@ -11,6 +11,7 @@
         <!-- Navigation -->
         <nav class="bg-gradient-to-r from-blue-600 to-indigo-600 p-4 shadow-md">
             <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-center gap-4 sm:gap-6">
+                <a href="{{ route('welcome.create') }}" class="text-white text-lg font-medium hover:bg-blue-700 px-4 py-2 rounded-md transition duration-300">Записаться на курс</a>
                 <a href="{{ route('objects.math') }}" class="text-white text-lg font-medium hover:bg-blue-700 px-4 py-2 rounded-md transition duration-300">Математика</a>
                 <a href="{{ route('objects.physics') }}" class="text-white text-lg font-medium hover:bg-blue-700 px-4 py-2 rounded-md transition duration-300">Физика</a>
                 <a href="{{ route('objects.russian') }}" class="text-white text-lg font-medium hover:bg-blue-700 px-4 py-2 rounded-md transition duration-300">Русский</a>

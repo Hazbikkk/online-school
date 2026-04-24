@@ -69,13 +69,77 @@
             transition: max-height 0.3s ease-out;
         }
         .description.open {
-            max-height: 200px; /* Достаточно для большинства описаний */
+            max-height: 300px; /* Увеличено для изображений и текста */
+        }
+        /* Новые стили для описаний */
+        .course-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.2));
+            backdrop-filter: blur(5px);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .course-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+        .course-icon {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 8px;
+            border: 2px solid rgba(255,255,255,0.3);
+        }
+        .course-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #fff;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+        }
+        .course-description {
+            font-size: 0.9rem;
+            color: #e2e8f0;
+            line-height: 1.5;
+        }
+        .toggle-icon {
+            transition: transform 0.3s ease;
+        }
+        .rotate-180 {
+            transform: rotate(180deg);
+        }
+        header {
+            display: flex;
+            justify-content: center;
+            gap: 2.5rem;
+            background-color: #ffffff;
+            position: relative;
+            z-index: 50;
+            padding: 1rem 0;
+        }
+
+        header a {
+            color: #000000;
+            font-weight: 500;
+            text-decoration: none;
+        }
+
+        header a:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
+<header>
+    <a class="mr-10" href="{{ route('.') }}">Главная</a>
+    <a class="mr-10" href="#">О нас</a>
+    <a class="mr-10" href="#">Спонсоры</a>
+    <a class="mr-10" href="#">Поддержка</a>
+</header>
 <body class="p-6 lg:p-8" style="background-image: url('https://images.unsplash.com/photo-1516321310764-8df5be73b6f0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');">
     <div class="overlay bg-black/60 dark:bg-black/75"></div> <!-- Мягкий однотонный оверлей -->
-    <div class="relative container mx-auto max-w-3xl bg-white/95 dark:bg-gray-900/95 rounded-xl shadow-2xl p-8 text-center backdrop-blur-md fade-in">
+    <div class="relative container mt-12 mx-auto max-w-3xl bg-white/95 dark:bg-gray-900/95 rounded-xl shadow-2xl p-8 text-center backdrop-blur-md fade-in">
         <!-- Логотип (опционально) -->
         <img src="/images/logo.png" alt="Логотип онлайн-школы" class="mx-auto mb-6 w-32 h-auto hidden" onerror="this.classList.add('hidden')">
 
@@ -108,21 +172,30 @@
             <h3 class="text-xl font-medium text-white dark:text-gray-200 mb-4">Доступные курсы:</h3>
             <ul class="space-y-3 text-white">
                 @foreach($objects as $object)
-                    <li class="p-4 bg-gradient-to-r from-purple-500/80 to-blue-500/80 rounded-lg card-hover cursor-pointer" onclick="toggleDescription(this)">
-                        <div class="flex justify-between items-center">
-                            <span>{{ $object }}</span>
-                            <svg class="w-5 h-5 text-white transform transition-transform duration-300 toggle-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-                        </div>
-                        <div class="description text-sm text-gray-200 mt-2">
-                        @if($object == "Математика")
-                            {{ $descript = "матик" }}
-                        @elseif($object == "Физика")
-                            {{ $descript = "физик" }}
-                        @elseif($object == "Русский")
-                            {{ $descript = "рус" }}
-                        @elseif($object == "География")
-                            {{ $descript = "гео" }}
-                        @endif
+                    <li class="course-item card-hover cursor-pointer" onclick="toggleDescription(this)">
+                        <img src="{{ 
+    $object == 'Математика' ? asset('images/math_logo.png') :
+    ($object == 'Физика' ? asset('images/physics_logo.png') :
+    ($object == 'Русский' ? asset('images/russian_logo.png') :
+    ($object == 'География' ? asset('images/geography_logo.png') :
+    asset('images/default_logo.png'))))
+}}" alt="{{ $object }} icon" class="course-icon">
+                        <div class="flex-1">
+                            <div class="flex justify-between items-center">
+                                <span class="course-title">{{ $object }}</span>
+                                <svg class="w-5 h-5 text-white transform transition-transform duration-300 toggle-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            </div>
+                            <div class="description course-description mt-2">
+                                @if($object == 'Математика' && !empty($descript))
+                                    {{ $descript[0] ?? "" }}
+                                @elseif($object == 'Физика')
+                                    {{ $descript[1] ?? "" }}
+                                @elseif($object == 'Русский')
+                                    {{ $descript[2] ?? "" }}
+                                @elseif($object == 'География')
+                                    {{ $descript[3] ?? "" }}
+                                @endif
+                            </div>
                         </div>
                     </li>
                 @endforeach
