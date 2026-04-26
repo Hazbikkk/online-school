@@ -4,20 +4,14 @@ namespace App\Routes;
 
 use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Route;
-use App\Models\Roles;
-use Illuminate\Http\Request;
 use App\Http\Controllers\AdminPanelController;
-use App\Models\AdminPanel;
 use App\Http\Controllers\AuthController;
-use App\Http\Middleware\ValidRole;
 use App\Http\Middleware\AdminOrUser;
 use App\Http\Middleware\IsAdmin;
 use App\Http\Controllers\ObjectsController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\EmployeeController;
-use App\Http\Requests\StoreEmployeeRequest;
 use App\Models\EmployeeProfile;
-use App\Http\Requests\EmployeeProfileRequest;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\EmployeeProfileController;
 use App\Http\Middleware\IsTeacher;
@@ -32,8 +26,8 @@ Route::get('/', function () {
     return view('welcome', ['title' => 'Онлайн-школа: Базовые предметы',
                             'objects' => $objects,
                             'descript' => $descript]);
-    
-    
+
+
 })->name('.');
 Route::resource('/adminPanel', AdminPanelController::class)
 ->middleware(IsAdmin::class);
@@ -55,6 +49,8 @@ Route::get('/welcome', [WelcomeController::class, 'index'])
 ->name('welcome.index');
 Route::get('/welcome/sign_up', [WelcomeController::class, 'create'])
 ->name('welcome.create');
+Route::post('/welcome/sign_up/store', [WelcomeController::class, 'store'])
+->name('welcome.store');
 
 Route::get('/objects/math', [ObjectsController::class, 'indexMath'])
 ->name('objects.math');

@@ -6,9 +6,11 @@ RUN apt-get update && apt-get install -y \
       libpq-dev \
       libpng-dev \
       libzip-dev \
+      libsqlite3-dev \
       zip unzip \
       git && \
       docker-php-ext-install pdo_mysql && \
+      docker-php-ext-install pdo_sqlite && \
       docker-php-ext-install bcmath && \
       docker-php-ext-install gd && \
       docker-php-ext-install zip && \

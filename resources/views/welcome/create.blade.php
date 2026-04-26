@@ -21,29 +21,29 @@
 
 <div class="w-full max-w-md mx-auto">
     <div class="bg-white rounded-2xl shadow-xl p-8 border border-gray-100">
-        
+
         <!-- Заголовок -->
         <h1 class="text-2xl sm:text-3xl font-bold text-center text-gray-800 mb-8">
             Запишитесь на курс
         </h1>
 
         <!-- Форма -->
-        <form method="POST" action="#" class="space-y-6">
-            
+        <form method="POST" action="{{ route("welcome.store") }}" class="space-y-6">
+            @csrf
             <!-- Выбор предмета -->
             <div>
                 <label for="object" class="block text-sm font-medium text-gray-700 mb-2">
                     Выберите предмет
                 </label>
-                <select 
-                    name="object" 
+                <select
+                    name="subject"
                     id="object"
                     class="w-full px-4 py-3 text-gray-800 bg-white border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-200"
                 >
                     @foreach($objects as $object)
                         <option>{{ $object }}</option>
                     @endforeach
-                
+
                 </select>
             </div>
 
@@ -52,8 +52,8 @@
                 <label for="teacher" class="block text-sm font-medium text-gray-700 mb-2">
                     Выберите преподавателя
                 </label>
-                <select 
-                    name="teacher" 
+                <select
+                    name="teacher"
                     id="teacher"
                     class="w-full px-4 py-3 text-gray-800 bg-white border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-200"
                 >
@@ -65,8 +65,8 @@
 
             <!-- Кнопка -->
             <div class="pt-4">
-                <button 
-                    type="submit" 
+                <button
+                    type="submit"
                     class="w-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold py-3 px-6 rounded-lg shadow-md hover:shadow-lg hover:from-blue-700 hover:to-indigo-700 transform hover:-translate-y-0.5 transition duration-300"
                 >
                     Записаться на курс

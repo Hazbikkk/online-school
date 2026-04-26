@@ -6,15 +6,32 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Успешная регистрация</title>
     <style>
+        .back_div
+        {
+            padding-top: 10px;
+            padding-bottom: 10px;
+            margin-left: 50px;
+            margin-top: 20px;
+            margin-right: 0;
+        }
+        .back
+        {
+            border-radius: 10px;
+            background-color: #3b82f6;
+            padding: 10px;
+            text-decoration: none;
+            color: white;
+        }
         body {
             margin: 0;
             padding: 0;
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
             background-color: #f4f4f9;
             color: #333;
+            display: flex;
         }
         .container {
-            max-width: 600px;
+            max-width: 800px;
             margin: 20px auto;
             background-color: #ffffff;
             border-radius: 8px;
@@ -78,6 +95,9 @@
     </style>
 </head>
 <body>
+    <div class="back_div">
+        <a href="{{ route("auth.user") }}" class="back">Назад</a>
+    </div>
     <div class="container">
         <div class="header">
             <h1>Всё прошло успешно, {{ $name }}!</h1>

@@ -2,7 +2,9 @@
 
 namespace App\Models;
 
-class Cours
-{
+use Illuminate\Database\Eloquent\Model;
 
+class Cours extends Model
+{
+    protected $fillable = ['subject', 'teacher'];
 }

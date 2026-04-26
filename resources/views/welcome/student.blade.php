@@ -1,3 +1,4 @@
+<?php session_start() ?>
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -18,6 +19,10 @@
                 <a href="{{ route('objects.geography') }}" class="text-white text-lg font-medium hover:bg-blue-700 px-4 py-2 rounded-md transition duration-300">География</a>
             </div>
         </nav>
+
+        @if(isset($_SESSION['warning']))
+            <h2>{{$_SESSION['warning']}}</h2>
+        @endif
 
         <!-- Main Content -->
         <main class="flex-grow flex items-center justify-center">
@@ -41,3 +46,6 @@
     </div>
 </body>
 </html>
+<?php
+session_destroy();
+?>

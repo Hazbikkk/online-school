@@ -30,5 +30,6 @@ services:
     volumes:
       - ./:/var/www
     command: php artisan queue:work
+    container_name: online_school_queue
     depends_on:
       - redis
