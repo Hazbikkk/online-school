@@ -16,6 +16,55 @@
         <script src="https://cdn.tailwindcss.com"></script>
     @endif
     <style>
+        @media(max-width: 320px)
+        {
+            li{
+                font-size: 10px;
+            }
+            .course-icon{
+                width: 10px;
+            }
+            svg
+            {
+                width: 20px;
+            }
+        }
+        @media(max-width: 508px)
+        {
+            header
+            {
+                height: 40px;
+            }
+            #home, #about, #sponsors
+            {
+                margin-right: 5px;
+            }
+            #home, #about, #sponsors, #technical_support
+            {
+                font-size: 10px
+            }
+        }
+        @media(max-width: 525px)
+        {
+            #home, #about, #sponsors, #technical_support
+            {
+                font-size: 15px;
+            }
+        }
+        @media(min-width: 595px){
+            #home
+            {
+                margin-left: 20px;
+                margin-right: 10px;
+            }
+            #about, #sponsors {
+                margin-right: 10px;
+            }
+            path
+            {
+                width: 30px;
+            }
+        }
         html, body {
             height: 100%;
             margin: 0;
@@ -132,10 +181,10 @@
     </style>
 </head>
 <header>
-    <a class="mr-10" href="{{ route('.') }}">Главная</a>
-    <a class="mr-10" href="#">О нас</a>
-    <a class="mr-10" href="#">Спонсоры</a>
-    <a class="mr-10" href="#">Поддержка</a>
+    <a class="mr-10" id="home" href="{{ route('.') }}">Главная</a>
+    <a class="mr-10" id="about" href="#">О нас</a>
+    <a class="mr-10" id="sponsors" href="#">Спонсоры</a>
+    <a class="mr-10" id="technical_support" href="#">Поддержка</a>
 </header>
 <body class="p-6 lg:p-8" style="background-image: url('https://images.unsplash.com/photo-1516321310764-8df5be73b6f0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');">
     <div class="overlay bg-black/60 dark:bg-black/75"></div> <!-- Мягкий однотонный оверлей -->
@@ -173,7 +222,7 @@
             <ul class="space-y-3 text-white">
                 @foreach($objects as $object)
                     <li class="course-item card-hover cursor-pointer" onclick="toggleDescription(this)">
-                        <img src="{{ 
+                        <img src="{{
     $object == 'Математика' ? asset('images/math_logo.png') :
     ($object == 'Физика' ? asset('images/physics_logo.png') :
     ($object == 'Русский' ? asset('images/russian_logo.png') :

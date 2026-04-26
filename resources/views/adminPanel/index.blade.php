@@ -38,6 +38,7 @@
             <a href="{{ route('adminPanel.create') }}" class="inline-block bg-blue-500 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-200">
                 Создать учителя
             </a>
+            <h4>{{ $teachers->links('vendor.pagination.tailwind')  }}</h4>
         </div>
     </div>
 </body>

@@ -46,7 +46,7 @@ Route::post('/register', [AuthController::class, 'storeRegisterStudents'])
 ->name('register.students.store');
 
 Route::get('/welcome', [WelcomeController::class, 'index'])
-->name('welcome.index');
+->name('welcome.index')->middleware();
 Route::get('/welcome/sign_up', [WelcomeController::class, 'create'])
 ->name('welcome.create');
 Route::post('/welcome/sign_up/store', [WelcomeController::class, 'store'])

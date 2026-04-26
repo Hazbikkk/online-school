@@ -11,11 +11,13 @@ class WelcomeController extends Controller
 {
     public function index(Request $request)
     {
-        $user_sess = $request->session()->get('storeUser');
-
+        if(session()->has('storeUser'))
+        {
+            $user_sess = $request->session()->get('storeUser');
+        }
         $users = AuthUsers::all();
 
-        return view('welcome.student', ['name' => $user_sess['name']]);
+        return view('welcome.student', ['name' => !empty($user_sess['name']) ? $user_sess['name'] : header("Location: /")]);
     }
 
     public function create()
